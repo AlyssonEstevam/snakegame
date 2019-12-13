@@ -1,0 +1,43 @@
+.container {
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    grid-template-rows: 1fr 2fr 1fr;
+    grid-template-columns: 2fr 1fr 2fr;
+    grid-template-areas: ". titulo ." ". mapa ." ". footer .";
+    row-gap: 5px;
+    height: 600px;
+}
+
+.divTitulo {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    background: #FFFFFF;
+    grid-area: titulo;
+}
+
+.titulo {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.divMapa {
+    border-style: solid;
+    grid-area: mapa;
+}
+
+.divFooter {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-rows: 1fr 1fr;
+    row-gap: 10px;
+    grid-area: footer;
+}
+
+.pontuacao {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+}
