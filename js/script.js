@@ -8,6 +8,7 @@ $(document).ready(function() {
     var comida;
     var pontos;
     var vetorCobra;
+    var velocidade;
 
     function criarCobra() {
         var tamanhoCobra = 1;
@@ -25,42 +26,43 @@ $(document).ready(function() {
         };
     }
 
-    function configuracao() {
+    function definicoesJogo() {
 
         colorirMapa();
 
-        var eixo_x = vetorCobra[0].x;
-        var eixo_y = vetorCobra[0].y;
+        var eixoX = vetorCobra[0].x;
+        var eixoY = vetorCobra[0].y;
 
         switch (movimento) {
             case "direita":
-                eixo_x++;
+                eixoX++;
                 break;
             case "esquerda":
-                eixo_x--;
+                eixoX--;
                 break;
             case "baixo":
-                eixo_y++;
+                eixoY++;
                 break;
             case "cima":
-                eixo_y--;
+                eixoY--;
                 break;
         }
 
 
-        if (eixo_x == -1 || eixo_x == largura / celula || eixo_y == -1 || eixo_y == altura / celula || verificaColisao(eixo_x, eixo_y, vetorCobra)) {
+        if (eixoX == -1 || eixoX == largura / celula || eixoY == -1 || eixoY == altura / celula || verificaColisao(eixoX, eixoY, vetorCobra)) {
             iniciarJogo();
             return;
         }
 
-        if (eixo_x == comida.x && eixo_y == comida.y) {
-            var raboCobra = { x: eixo_x, y: eixo_y };
+        if (eixoX == comida.x && eixoY == comida.y) {
+            var raboCobra = { x: eixoX, y: eixoY };
             pontos += 1;
+            velocidade = 100 - pontos;
             novaComida();
         } else {
             var raboCobra = vetorCobra.pop();
-            raboCobra.x = eixo_x;
-            raboCobra.y = eixo_y;
+            raboCobra.x = eixoX;
+            raboCobra.y = eixoY;
         }
 
         vetorCobra.unshift(raboCobra);
@@ -83,7 +85,7 @@ $(document).ready(function() {
     }
 
     function renderizarCorpoCobra(x, y) {
-        contexto.fillStyle = "blue";
+        contexto.fillStyle = "green";
         contexto.fillRect(x * celula, y * celula, celula, celula);
         contexto.strokeStyle = "#000000";
         contexto.strokeRect(x * celula, y * celula, celula, celula);
@@ -138,10 +140,11 @@ $(document).ready(function() {
         criarCobra();
         novaComida();
         pontos = 0;
+        velocidade = 100;
 
         if (typeof jogoIniciado != "undefined") {
             clearInterval(jogoIniciado);
         }
-        jogoIniciado = setInterval(configuracao, 60);
+        jogoIniciado = setInterval(definicoesJogo, velocidade);
     }
 });
