@@ -37,7 +37,8 @@
     grid-area: footer;
 }
 
-.pontuacao {
+.pontuacao,
+.highscore {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
 }
